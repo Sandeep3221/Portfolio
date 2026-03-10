@@ -47,6 +47,20 @@ const Navigation = () => {
     }
   }, [])
 
+  const handleMobileClick = (e, href) => {
+    e.preventDefault()
+    setIsOpen(false)
+    
+    const targetId = href.substring(1)
+    const elem = document.getElementById(targetId)
+    
+    if (elem) {
+      setTimeout(() => {
+        elem.scrollIntoView({ behavior: "smooth" })
+      }, 150)
+    }
+  }
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -119,7 +133,7 @@ const Navigation = () => {
                     <a
                       key={item.name}
                       href={item.href}
-                      onClick={() => setIsOpen(false)}
+                      onClick={(e) => handleMobileClick(e, item.href)}
                       className={`block py-3 text-lg font-medium transition-colors border-b border-gray-800/50 last:border-0 ${
                         isActive ? "text-blue-400" : "text-gray-300 hover:text-white"
                       }`}
