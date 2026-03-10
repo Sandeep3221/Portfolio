@@ -7,16 +7,19 @@ import { ChevronDown, Download, Github, Linkedin, Mail } from 'lucide-react'
 const Hero = () => {
   const ref = useRef(null)
   const [particles, setParticles] = useState([])
+  const [isMounted, setIsMounted] = useState(false)
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end start'],
   })
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0])
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8])
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%'], { clamp: true })
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0], { clamp: true })
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8], { clamp: true })
 
   useEffect(() => {
+    setIsMounted(true)
     setParticles(
       [...Array(30)].map((_, i) => ({
         id: i,
@@ -40,7 +43,7 @@ const Hero = () => {
         className="text-center z-10 px-4"
       >
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0.01, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="mb-8"
@@ -51,7 +54,7 @@ const Hero = () => {
             </span>
           </h1>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0.01, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl md:text-2xl text-gray-300 mb-8"
@@ -61,7 +64,7 @@ const Hero = () => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0.01, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex justify-center space-x-6 mb-12"
@@ -83,7 +86,7 @@ const Hero = () => {
               icon: Mail,
               href: 'mailto:kashyapadhikari09@gmail.com',
               label: 'Email',
-              newTab: true,
+              newTab: false, // Usually best to let mailto open default mail client without a blank tab
             },
             {
               icon: Download,
@@ -95,9 +98,8 @@ const Hero = () => {
             <motion.a
               key={social.label}
               href={social.href}
-              {...(social.download
-                ? { download: 'Sandeep_Adhikari_Resume.pdf' }
-                : {})}
+              {...(social.download ? { download: 'Sandeep_Adhikari_Resume.pdf' } : {})}
+              {...(social.newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               whileHover={{ scale: 1.2, rotate: 5 }}
               whileTap={{ scale: 0.9 }}
               className="p-3 bg-gray-900/50 backdrop-blur-sm rounded-full border border-gray-700/50 hover:border-blue-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-400/20"
@@ -111,7 +113,7 @@ const Hero = () => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0.01, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
@@ -143,29 +145,29 @@ const Hero = () => {
         <ChevronDown size={32} className="text-gray-400" />
       </motion.div>
 
-      {/* Particles — only rendered client-side after mount */}
-      <div className="absolute inset-0 overflow-hidden">
-        {particles.map((p) => (
-          <motion.div
-            key={p.id}
-            className="absolute w-1 h-1 bg-blue-400/20 rounded-full"
-            initial={{ x: p.x, y: p.y }}
-            animate={{
-              y: [null, p.animY, null],
-              x: [null, p.animX, null],
-              opacity: [0.2, 0.8, 0.2],
-            }}
-            transition={{
-              duration: p.duration,
-              repeat: Number.POSITIVE_INFINITY,
-              repeatType: 'reverse',
-            }}
-          />
-        ))}
-      </div>
+      {isMounted && (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {particles.map((p) => (
+            <motion.div
+              key={p.id}
+              className="absolute w-1 h-1 bg-blue-400/20 rounded-full"
+              initial={{ x: p.x, y: p.y }}
+              animate={{
+                y: [null, p.animY, null],
+                x: [null, p.animX, null],
+                opacity: [0.2, 0.8, 0.2],
+              }}
+              transition={{
+                duration: p.duration,
+                repeat: Number.POSITIVE_INFINITY,
+                repeatType: 'reverse',
+              }}
+            />
+          ))}
+        </div>
+      )}
 
-      {/* Geometric background elements */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{
