@@ -1,90 +1,95 @@
 'use client'
 
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { motion } from 'framer-motion'
 import { ExternalLink, Github, Briefcase } from 'lucide-react'
 
 const Projects = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
   const projects = [
     {
       title: 'Agro AI',
-      description:
-        'A multilingual, AI-powered web application that helps farmers predict crop yield and view real-time weather insights. Built with responsive React and Tailwind CSS focusing on accessibility, usability and performance — making precision agriculture accessible to rural communities.',
+      description: [
+        'Engineered an AI-powered web application for accurate crop yield prediction and real-time weather analysis.',
+        'Implemented multilingual support to ensure accessibility and usability for rural farming communities.',
+        'Optimized frontend performance and accessibility using React and Tailwind CSS.',
+      ],
       tech: ['React.js', 'Fast API', 'Auth'],
       liveDemo: 'https://agrovision-black.vercel.app/',
       github: 'https://github.com/Sandeep3221/AGRI-CU',
-      gradient: 'from-pink-400 to-pink-600',
-      bgGradient: 'from-pink-500/10 to-pink-600/10',
+      gradient: 'from-blue-500 to-cyan-500',
       img: '/Agri-AI.png',
       freelance: false,
     },
     {
       title: 'LinkedIn Clone',
-      description:
-        'A full-stack LinkedIn clone with real-time features using Socket.io for instant updates, secure authentication with JWT and cookies, and an interactive UI for networking, posts, and connections. Replicates core professional networking workflows end-to-end.',
+      description: [
+        'Developed a full-stack social networking platform replicating core LinkedIn professional workflows.',
+        'Integrated Socket.io to establish real-time instant messaging and live feed updates.',
+        'Implemented secure user authentication and session management utilizing JWT and cookies.',
+      ],
       tech: ['React.js', 'Express.js', 'MongoDB', 'Socket.io'],
       liveDemo: '',
       github: 'https://github.com/Sandeep3221/LinkedIn',
-      gradient: 'from-teal-400 to-teal-600',
-      bgGradient: 'from-teal-500/10 to-teal-600/10',
+      gradient: 'from-blue-500 to-indigo-500',
       img: '/LinkedIn.png',
       freelance: false,
     },
     {
       title: 'DevTinder',
-      description:
-        'A web app inspired by Tinder where developers can accept or reject project collaboration requests, helping them find the right teammates efficiently. Features swipe-based matching, user profiles, and connection management — built for the developer community.',
+      description: [
+        'Built a swipe-based matching platform designed to connect developers for project collaboration.',
+        'Designed intuitive user profiles and a streamlined connection management system.',
+        'Architected a robust backend with Node.js and MongoDB to handle complex matching logic efficiently.',
+      ],
       tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB'],
       liveDemo: '',
       github: 'https://github.com/Sandeep3221/DevTinder',
-      gradient: 'from-blue-400 to-blue-600',
-      bgGradient: 'from-blue-500/10 to-blue-600/10',
+      gradient: 'from-purple-500 to-pink-500',
       img: '/Devtinder.png',
       freelance: false,
     },
     {
       title: 'Dr. Marketing',
-      description:
-        'Designed and implemented a clean, responsive UI for Dr. Marketing as a freelance project, focusing on intuitive user experience and modern frontend aesthetics. Delivered a polished, conversion-focused landing page tailored to the client\'s brand identity.',
-      tech: ['React.js', 'Tailwind CSS'],
+      description: [
+        'Designed and delivered a conversion-focused landing page tailored precisely to the client brand identity.',
+        'Built a responsive, modern frontend architecture emphasizing intuitive user experience.',
+        'Integrated EmailJS to facilitate seamless lead generation and direct client communication.',
+      ],
+      tech: ['React.js', 'Tailwind CSS', 'EmailJs'],
       liveDemo: 'https://dr-marketing-page.vercel.app/',
       github: 'https://github.com/Sandeep3221/Dr-MarketingPage',
-      gradient: 'from-cyan-400 to-cyan-600',
-      bgGradient: 'from-cyan-500/10 to-cyan-600/10',
+      gradient: 'from-teal-400 to-emerald-500',
       img: '/drmarketing.png',
       freelance: true,
     },
     {
       title: 'Ranikhet Ecostay',
-      description:
-        'A landing page for Ranikhet Ecostay, a boutique eco-friendly accommodation in Ranikhet. Built with React and Tailwind CSS, the design emphasizes the serene natural surroundings while providing essential information and booking options for potential guests.',
-      tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS'],
+      description: [
+        'Developed a visually engaging and performant landing page for a boutique eco-friendly accommodation.',
+        'Focused on high-quality visual layouts and intuitive UI/UX to attract potential guests.',
+        'Streamlined the booking inquiry pipeline using React and EmailJS integration.',
+      ],
+      tech: ['React.js', 'Tailwind CSS', 'EmailJs'],
       liveDemo: 'https://ranikhetecostay.vercel.app/',
       github: 'https://github.com/Sandeep3221/Ranikhet_Ecostay',
-      gradient: 'from-green-400 to-emerald-600',
-      bgGradient: 'from-green-500/10 to-emerald-600/10',
+      gradient: 'from-emerald-500 to-green-600',
       img: '/Ranikheth.png',
       freelance: true,
     },
   ]
 
   return (
-    <section
-      id="projects"
-      ref={ref}
-      className="py-20 px-4 bg-gradient-to-b from-black/50 to-gray-950/50"
-    >
-      <div className="max-w-6xl mx-auto">
+    <section id="projects" className="py-24 px-4 bg-black relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/5 to-transparent pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-24"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
             Featured{' '}
             <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
               Projects
@@ -93,91 +98,106 @@ const Projects = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto rounded-full" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              whileHover={{ y: -10, scale: 1.02 }}
-              className={`group bg-gradient-to-br ${project.bgGradient} backdrop-blur-sm rounded-xl border border-gray-800/50 hover:border-gray-700/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:shadow-blue-500/10`}
-            >
-              <div className="p-6">
-                <div className="relative mb-3">
-                  <img
-                    src={project.img}
-                    alt={project.title}
-                    className="w-full h-50 object-cover rounded-lg"
-                  />
-                  {project.freelance && (
-                    <span className="absolute top-2 right-2 flex items-center gap-1 px-2 py-1 bg-black/70 backdrop-blur-sm text-yellow-400 text-xs font-semibold rounded-full border border-yellow-400/40">
-                      <Briefcase size={10} />
-                      #freelance
-                    </span>
-                  )}
-                </div>
+        <div className="flex flex-col gap-24 md:gap-32">
+          {projects.map((project, index) => {
+            const isEven = index % 2 === 0
 
-                <div
-                  className={`w-full h-2 bg-gradient-to-r ${project.gradient} rounded-full mb-6`}
-                />
+            return (
+              <div
+                key={project.title}
+                className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 md:gap-16 items-center`}
+              >
+                <motion.div
+                  initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  transition={{ duration: 0.8 }}
+                  className="w-full md:w-1/2 relative group"
+                >
+                  <div className="relative rounded-2xl overflow-hidden border border-gray-800/60 bg-gray-900/50 aspect-[4/3] sm:aspect-video md:aspect-[4/3] lg:aspect-video flex items-center justify-center">
+                    <img
+                      src={project.img}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60" />
+                    
+                    {project.freelance && (
+                      <span className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 bg-black/80 backdrop-blur-md text-yellow-400 text-xs font-bold rounded-full border border-yellow-400/30">
+                        <Briefcase size={12} />
+                        FREELANCE
+                      </span>
+                    )}
+                  </div>
+                </motion.div>
 
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
-                  {project.title}
-                </h3>
+                <motion.div
+                  initial={{ opacity: 0, x: isEven ? 50 : -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="w-full md:w-1/2 flex flex-col justify-center"
+                >
+                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                    {project.title}
+                  </h3>
 
-                <p className="text-gray-300 text-sm leading-relaxed mb-4 group-hover:text-gray-200 transition-colors">
-                  {project.description}
-                </p>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.tech.map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="px-3 py-1 bg-gray-900 border border-gray-800 rounded-full text-gray-300 text-xs font-medium tracking-wide"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
 
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tech.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-3 py-1 bg-gray-800/50 text-gray-300 text-xs rounded-full border border-gray-700/50 group-hover:border-gray-600/50 transition-colors"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+                  <ul className="space-y-3 mb-8">
+                    {project.description.map((item, itemIndex) => (
+                      <li key={itemIndex} className="flex items-start space-x-3 text-gray-400">
+                        <div
+                          className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${project.gradient} mt-2.5 flex-shrink-0 opacity-80`}
+                        />
+                        <span className="text-base leading-relaxed group-hover:text-gray-300 transition-colors">
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
 
-                <div className="flex space-x-4">
-                  {project.liveDemo ? (
-                    <motion.a
-                      href={project.liveDemo}
+                  <div className="flex flex-row gap-3 w-full sm:w-auto">
+                    {project.liveDemo ? (
+                      <a
+                        href={project.liveDemo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex-1 sm:flex-none flex justify-center items-center space-x-1.5 sm:space-x-2 px-2 sm:px-6 py-3 bg-gradient-to-r ${project.gradient} rounded-xl text-white font-semibold text-sm sm:text-base hover:scale-105 hover:shadow-lg transition-all duration-300 whitespace-nowrap`}
+                      >
+                        <ExternalLink size={18} className="w-4 h-4 sm:w-5 sm:h-5" />
+                        <span>Live Demo</span>
+                      </a>
+                    ) : (
+                      <span className={`flex-1 sm:flex-none flex justify-center items-center space-x-1.5 sm:space-x-2 px-2 sm:px-6 py-3 bg-gradient-to-r ${project.gradient} rounded-xl text-white font-semibold text-sm sm:text-base opacity-50 cursor-not-allowed whitespace-nowrap`}>
+                        <ExternalLink size={18} className="w-4 h-4 sm:w-5 sm:h-5" />
+                        <span>Live Demo</span>
+                      </span>
+                    )}
+
+                    <a
+                      href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`flex items-center space-x-2 px-4 py-2 bg-gradient-to-r ${project.gradient} rounded-lg text-white text-sm font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300`}
+                      className="flex-1 sm:flex-none flex justify-center items-center space-x-1.5 sm:space-x-2 px-2 sm:px-6 py-3 bg-transparent border border-gray-700 hover:border-gray-500 rounded-xl text-gray-300 hover:text-white font-semibold text-sm sm:text-base hover:bg-gray-800/50 transition-all duration-300 whitespace-nowrap"
                     >
-                      <ExternalLink size={16} />
-                      <span>Live Demo</span>
-                    </motion.a>
-                  ) : (
-                    <span
-                      className={`flex items-center space-x-2 px-4 py-2 bg-gradient-to-r ${project.gradient} rounded-lg text-white text-sm font-medium opacity-40 cursor-not-allowed`}
-                    >
-                      <ExternalLink size={16} />
-                      <span>Live Demo</span>
-                    </span>
-                  )}
-
-                  <motion.a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex items-center space-x-2 px-4 py-2 border border-gray-700/50 rounded-lg text-gray-300 text-sm font-medium hover:border-blue-400/50 hover:text-white transition-all duration-300"
-                  >
-                    <Github size={16} />
-                    <span>Code</span>
-                  </motion.a>
-                </div>
+                      <Github size={18} className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <span>Source Code</span>
+                    </a>
+                  </div>
+                </motion.div>
               </div>
-            </motion.div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

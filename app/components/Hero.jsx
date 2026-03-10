@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
-import { ChevronDown, Download, Github, Linkedin, Mail } from 'lucide-react'
+import { ChevronDown, Download, Github, Linkedin, Mail, MapPin } from 'lucide-react'
 
 const Hero = () => {
   const ref = useRef(null)
@@ -36,16 +36,26 @@ const Hero = () => {
     <section
       id="home"
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
     >
       <motion.div
         style={{ y, opacity, scale }}
-        className="text-center z-10 px-4"
+        className="text-center z-10 px-4 max-w-5xl mx-auto flex flex-col items-center"
       >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-900/50 border border-gray-800 backdrop-blur-sm"
+        >
+          <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
+          <span className="text-sm font-medium text-gray-300">Available for new opportunities</span>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0.01, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
           className="mb-8"
         >
           <h1 className="text-5xl md:text-7xl font-bold mb-4">
@@ -57,7 +67,7 @@ const Hero = () => {
             initial={{ opacity: 0.01, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl text-gray-300 mb-8"
+            className="text-xl md:text-2xl text-gray-300"
           >
             Full-Stack Developer & Problem Solver
           </motion.p>
@@ -78,7 +88,7 @@ const Hero = () => {
             },
             {
               icon: Linkedin,
-              href: 'https://www.linkedin.com/in/sandeep-adhikari-76b778311?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+              href: 'https://www.linkedin.com/in/sandeep-adhikari-76b778311',
               label: 'LinkedIn',
               newTab: true,
             },
@@ -86,7 +96,7 @@ const Hero = () => {
               icon: Mail,
               href: 'mailto:kashyapadhikari09@gmail.com',
               label: 'Email',
-              newTab: false, // Usually best to let mailto open default mail client without a blank tab
+              newTab: false,
             },
             {
               icon: Download,
@@ -116,7 +126,7 @@ const Hero = () => {
           initial={{ opacity: 0.01, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
         >
           <motion.a
             href="#projects"
@@ -134,6 +144,20 @@ const Hero = () => {
           >
             Get In Touch
           </motion.a>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="flex flex-wrap items-center justify-center gap-x-2 gap-y-3 text-sm text-gray-500 font-medium"
+        >
+          <span>Student developer based in</span>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-900/50 border border-gray-800 backdrop-blur-sm text-gray-300">
+            <MapPin size={14} className="text-teal-400" />
+            <span>Kalimpong</span>
+          </div>
+          <span>• Open to opportunities</span>
         </motion.div>
       </motion.div>
 
