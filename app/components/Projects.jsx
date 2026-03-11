@@ -27,7 +27,7 @@ const Projects = () => {
         'Implemented secure user authentication and session management utilizing JWT and cookies.',
       ],
       tech: ['React.js', 'Express.js', 'MongoDB', 'Socket.io'],
-      liveDemo: '',
+      liveDemo: 'https://linked-in-omega-six.vercel.app/login',
       github: 'https://github.com/Sandeep3221/LinkedIn',
       gradient: 'from-blue-500 to-indigo-500',
       img: '/LinkedIn.png',
