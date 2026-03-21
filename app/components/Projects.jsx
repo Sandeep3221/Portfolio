@@ -4,13 +4,27 @@ import { motion } from 'framer-motion'
 import { ExternalLink, Github, Briefcase } from 'lucide-react'
 
 const Projects = () => {
-  const projects = [
+const projects = [
+    {
+      title: 'Kalimpong Homestays',
+      description: [
+        'Developed a full-stack reservation platform featuring seamless property discovery, dynamic routing, and secure user authentication.',
+        'Implemented advanced search and filtering logic on the Express backend using MongoDB to handle complex booking queries and availability.',
+        'Built a highly responsive frontend with React and Tailwind CSS, prioritizing fast load times and an intuitive mobile-first user experience.',
+      ],
+      tech: ['React.js', 'Tailwind CSS', 'Node.js', 'Express.js', 'MongoDB', 'Auth'],
+      liveDemo: 'https://homestay-reservation.vercel.app/',
+      github: 'https://github.com/Sandeep3221/Homestay_Reservation',
+      gradient: 'from-amber-400 to-orange-500',
+      img: '/Homestay.png',
+      freelance: false,
+    },
     {
       title: 'Agro AI',
       description: [
-        'Engineered an AI-powered web application for accurate crop yield prediction and real-time weather analysis.',
-        'Implemented multilingual support to ensure accessibility and usability for rural farming communities.',
-        'Optimized frontend performance and accessibility using React and Tailwind CSS.',
+        'Built an AI-powered web application capable of accurate crop yield prediction and real-time weather data analysis via FastAPI.',
+        'Integrated multilingual support to ensure accessibility and ease of use for diverse rural farming communities.',
+        'Optimized frontend rendering performance and cross-browser compatibility utilizing React and Tailwind CSS.',
       ],
       tech: ['React.js', 'Fast API', 'Auth'],
       liveDemo: 'https://agrovision-black.vercel.app/',
@@ -22,9 +36,9 @@ const Projects = () => {
     {
       title: 'LinkedIn Clone',
       description: [
-        'Developed a full-stack social networking platform replicating core LinkedIn professional workflows.',
-        'Integrated Socket.io to establish real-time instant messaging and live feed updates.',
-        'Implemented secure user authentication and session management utilizing JWT and cookies.',
+        'Developed a full-stack social networking platform replicating core professional workflows, including user profiles and post feeds.',
+        'Integrated Socket.io to establish low-latency, real-time instant messaging and dynamic live feed updates.',
+        'Designed secure user authentication and session management pipelines utilizing JWT and HTTP-only cookies.',
       ],
       tech: ['React.js', 'Express.js', 'MongoDB', 'Socket.io'],
       liveDemo: 'https://linked-in-omega-six.vercel.app/login',
@@ -36,9 +50,9 @@ const Projects = () => {
     {
       title: 'DevTinder',
       description: [
-        'Built a swipe-based matching platform designed to connect developers for project collaboration.',
-        'Designed intuitive user profiles and a streamlined connection management system.',
-        'Architected a robust backend with Node.js and MongoDB to handle complex matching logic efficiently.',
+        'Created a swipe-based matching application designed to connect developers for networking and project collaboration.',
+        'Developed intuitive user profiles and a streamlined state management system for handling connection requests.',
+        'Built a scalable Node.js backend with MongoDB to process complex user matching logic and data storage efficiently.',
       ],
       tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB'],
       liveDemo: '',
@@ -50,9 +64,9 @@ const Projects = () => {
     {
       title: 'Dr. Marketing',
       description: [
-        'Designed and delivered a conversion-focused landing page tailored precisely to the client brand identity.',
-        'Built a responsive, modern frontend architecture emphasizing intuitive user experience.',
-        'Integrated EmailJS to facilitate seamless lead generation and direct client communication.',
+        'Designed and delivered a high-conversion landing page tailored precisely to match the client\'s specific brand identity.',
+        'Developed a responsive, modern frontend architecture emphasizing smooth animations and an intuitive user experience.',
+        'Integrated EmailJS to facilitate seamless lead generation and route direct client communications instantly.',
       ],
       tech: ['React.js', 'Tailwind CSS', 'EmailJs'],
       liveDemo: 'https://dr-marketing-page.vercel.app/',
@@ -64,9 +78,9 @@ const Projects = () => {
     {
       title: 'Ranikhet Ecostay',
       description: [
-        'Developed a visually engaging and performant landing page for a boutique eco-friendly accommodation.',
-        'Focused on high-quality visual layouts and intuitive UI/UX to attract potential guests.',
-        'Streamlined the booking inquiry pipeline using React and EmailJS integration.',
+        'Developed a visually engaging, high-performance landing page for a boutique eco-friendly accommodation business.',
+        'Focused on delivering high-quality visual layouts and interactive UI elements to attract and retain potential guests.',
+        'Streamlined the booking inquiry pipeline by integrating React with EmailJS for reliable, instant notification delivery.',
       ],
       tech: ['React.js', 'Tailwind CSS', 'EmailJs'],
       liveDemo: 'https://ranikhetecostay.vercel.app/',
@@ -114,7 +128,8 @@ const Projects = () => {
                   transition={{ duration: 0.8 }}
                   className="w-full md:w-1/2 relative group"
                 >
-                  <div className="relative rounded-2xl overflow-hidden border border-gray-800/60 bg-gray-900/50 aspect-[4/3] sm:aspect-video md:aspect-[4/3] lg:aspect-video flex items-center justify-center">
+                  {/* FIX APPLIED HERE: Replaced changing aspect ratios with a consistent 'aspect-video' */}
+                  <div className="relative w-full rounded-2xl overflow-hidden border border-gray-800/60 bg-gray-900/50 aspect-video flex items-center justify-center">
                     <img
                       src={project.img}
                       alt={project.title}
