@@ -37,7 +37,7 @@ const projects = [
       title: 'LinkedIn Clone',
       description: [
         'Developed a full-stack social networking platform replicating core professional workflows, including user profiles and post feeds.',
-        'Integrated Socket.io to establish low-latency, real-time instant messaging and dynamic live feed updates.',
+        'Integrated Socket.io to establish low-latency, real-time instant messaging and dynamic  feed updates.',
         'Designed secure user authentication and session management pipelines utilizing JWT and HTTP-only cookies.',
       ],
       tech: ['React.js', 'Express.js', 'MongoDB', 'Socket.io'],
