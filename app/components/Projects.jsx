@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { ExternalLink, Github, Briefcase } from 'lucide-react'
 
 const Projects = () => {
-const projects = [
+  const projects = [
     {
       title: 'Kalimpong Homestays',
       description: [
@@ -17,6 +17,20 @@ const projects = [
       github: 'https://github.com/Sandeep3221/Homestay_Reservation',
       gradient: 'from-amber-400 to-orange-500',
       img: '/Homestay.png',
+      freelance: false,
+    },
+    {
+      title: 'Support AI',
+      description: [
+        'Built an AI-powered customer support chatbot that answers queries using a custom knowledge base for accurate, business-specific responses.',
+        'Integrated Scalekit authentication to provide secure user login and session management.',
+        'Developed a responsive full-stack web application with a real-time chat interface to automate customer support and improve user experience.',
+      ],
+      tech: ['Next.js', 'Scalekit', 'Gemini AI'],
+      liveDemo: 'https://support-ai-orcin.vercel.app/',
+      github: 'https://github.com/Sandeep3221/SupportAI',
+      gradient: 'from-violet-500 to-fuchsia-500',
+      img: '/Supportai.png',
       freelance: false,
     },
     {
@@ -48,20 +62,6 @@ const projects = [
       freelance: false,
     },
     {
-      title: 'DevTinder',
-      description: [
-        'Created a swipe-based matching application designed to connect developers for networking and project collaboration.',
-        'Developed intuitive user profiles and a streamlined state management system for handling connection requests.',
-        'Built a scalable Node.js backend with MongoDB to process complex user matching logic and data storage efficiently.',
-      ],
-      tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB'],
-      liveDemo: '',
-      github: 'https://github.com/Sandeep3221/DevTinder',
-      gradient: 'from-purple-500 to-pink-500',
-      img: '/Devtinder.png',
-      freelance: false,
-    },
-    {
       title: 'Dr. Marketing',
       description: [
         'Designed and delivered a high-conversion landing page tailored precisely to match the client\'s specific brand identity.',
@@ -73,20 +73,6 @@ const projects = [
       github: 'https://github.com/Sandeep3221/Dr-MarketingPage',
       gradient: 'from-teal-400 to-emerald-500',
       img: '/drmarketing.png',
-      freelance: true,
-    },
-    {
-      title: 'Ranikhet Ecostay',
-      description: [
-        'Developed a visually engaging, high-performance landing page for a boutique eco-friendly accommodation business.',
-        'Focused on delivering high-quality visual layouts and interactive UI elements to attract and retain potential guests.',
-        'Streamlined the booking inquiry pipeline by integrating React with EmailJS for reliable, instant notification delivery.',
-      ],
-      tech: ['React.js', 'Tailwind CSS', 'EmailJs'],
-      liveDemo: 'https://ranikhetecostay.vercel.app/',
-      github: 'https://github.com/Sandeep3221/Ranikhet_Ecostay',
-      gradient: 'from-emerald-500 to-green-600',
-      img: '/Ranikheth.png',
       freelance: true,
     },
   ]
