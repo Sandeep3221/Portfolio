@@ -10,27 +10,40 @@ const Experience = () => {
 
   const experiences = [
     {
-      title: 'Freelancer Web Developer',
-      company: 'Dr Marketing',
-      location: 'Siliguri, India',
-      period: 'June 2025 - July 2025',
+      title: 'Freelance Web Developer',
+      company: 'Independent Clients',
+      location: 'Remote',
+      period: 'June 2025 - Present',
       description: [
-        'Engineered responsive and visually clean frontend interfaces using React.js.',
-        'Researched and integrated modern UI technologies to optimize the overall user experience.',
-        'Collaborated within an agile team environment to ensure seamless frontend delivery.',
+        'Design and build custom, responsive web applications for various independent clients.',
+        'Focus on delivering clean UI/UX, fast-loading performance, and modern digital experiences.',
+        'Manage end-to-end project development, from initial concept to final deployment.',
       ],
       color: 'from-blue-400 to-blue-600',
       shadow: 'hover:shadow-blue-500/10',
     },
     {
+      title: 'Web Developer',
+      company: 'E-Cell HIT',
+      location: 'Haldia, India',
+      period: 'May 2025 - Present',
+      description: [
+        'Develop and maintain digital platforms to support the official Entrepreneurship Cell.',
+        'Build web tools that facilitate student-led innovation, startup events, and workshops.',
+        'Collaborate within a strong community network to foster technical and entrepreneurial growth.',
+      ],
+      color: 'from-purple-400 to-purple-600',
+      shadow: 'hover:shadow-purple-500/10',
+    },
+    {
       title: 'Web & Tech Team Member',
-      company: 'Google Developer Group (College Club)',
+      company: 'Google Developer Group',
       location: 'Haldia, India',
       period: 'Jan 2025 - May 2025',
       description: [
-        'Co-organized a React.js workshop, managing event coordination and smooth execution for college students.',
-        'Acquired hands-on exposure to frontend development concepts and real-world tech event workflows.',
-        'Strengthened teamwork, communication, and technical event management skills in a collaborative setting.',
+        'Co-organized technical web workshops, managing digital coordination for college students.',
+        'Gained hands-on experience with real-world tech event workflows and team collaboration.',
+        'Helped build a supportive, community-driven environment for emerging developers.',
       ],
       color: 'from-cyan-400 to-cyan-600',
       shadow: 'hover:shadow-cyan-500/10',
@@ -57,7 +70,7 @@ const Experience = () => {
 
         <div className="relative">
           {/* Timeline line - adjusted positioning for perfect centering with the dots */}
-          <div className="absolute left-[31px] top-4 bottom-0 w-0.5 bg-gradient-to-b from-blue-400/50 to-cyan-400/50 hidden md:block" />
+          <div className="absolute left-[31px] top-4 bottom-0 w-0.5 bg-gradient-to-b from-blue-400/50 via-purple-400/50 to-cyan-400/50 hidden md:block" />
 
           <div className="space-y-12">
             {experiences.map((exp, index) => (
@@ -65,7 +78,8 @@ const Experience = () => {
                 key={index}
                 initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
+                // UPGRADED: Added the buttery cubic-bezier ease here for the main cards
+                transition={{ duration: 0.9, delay: index * 0.2, ease: [0.16, 1, 0.3, 1] }}
                 className="relative"
               >
                 {/* Timeline dot - precisely aligned over the vertical line */}
@@ -92,9 +106,9 @@ const Experience = () => {
                     </div>
                     
                     {/* Date Badge */}
-                    <div className="flex items-center space-x-2 text-gray-300 bg-gray-800/50 px-4 py-2 rounded-full border border-gray-700/50 w-fit">
+                    <div className="flex items-center space-x-2 text-gray-300 bg-gray-800/50 px-4 py-2 rounded-full border border-gray-700/50 w-fit shrink-0">
                       <Calendar size={14} className="text-blue-400" />
-                      <span className="text-sm font-medium">{exp.period}</span>
+                      <span className="text-sm font-medium whitespace-nowrap">{exp.period}</span>
                     </div>
                   </div>
 
@@ -104,9 +118,11 @@ const Experience = () => {
                         key={itemIndex}
                         initial={{ opacity: 0, x: -20 }}
                         animate={isInView ? { opacity: 1, x: 0 } : {}}
+                        // UPGRADED: Added the buttery ease to the individual bullet points too
                         transition={{
-                          duration: 0.6,
+                          duration: 0.8,
                           delay: index * 0.2 + itemIndex * 0.1,
+                          ease: [0.16, 1, 0.3, 1]
                         }}
                         className="flex items-start space-x-3 text-gray-300"
                       >

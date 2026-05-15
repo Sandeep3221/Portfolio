@@ -8,9 +8,9 @@ const Projects = () => {
     {
       title: 'Kalimpong Homestays',
       description: [
-        'Developed a full-stack reservation platform featuring seamless property discovery, dynamic routing, and secure user authentication.',
-        'Implemented advanced search and filtering logic on the Express backend using MongoDB to handle complex booking queries and availability.',
-        'Built a highly responsive frontend with React and Tailwind CSS, prioritizing fast load times and an intuitive mobile-first user experience.',
+        'Full-stack reservation platform with dynamic routing and secure authentication.',
+        'Custom MongoDB search and filtering logic to handle complex availability queries.',
+        'Mobile-first, highly responsive frontend built for speed and ease of use.',
       ],
       tech: ['React.js', 'Tailwind CSS', 'Node.js', 'Express.js', 'MongoDB', 'Auth'],
       liveDemo: 'https://homestay-reservation.vercel.app/',
@@ -22,9 +22,9 @@ const Projects = () => {
     {
       title: 'Support AI',
       description: [
-        'Built an AI-powered customer support chatbot that answers queries using a custom knowledge base for accurate, business-specific responses.',
-        'Integrated Scalekit authentication to provide secure user login and session management.',
-        'Developed a responsive full-stack web application with a real-time chat interface to automate customer support and improve user experience.',
+        'AI customer support chatbot utilizing a custom knowledge base for accurate answers.',
+        'Integrated Scalekit authentication for secure session management.',
+        'Real-time chat interface designed to automate support workflows.',
       ],
       tech: ['Next.js', 'Scalekit', 'Gemini AI'],
       liveDemo: 'https://support-ai-orcin.vercel.app/',
@@ -34,25 +34,25 @@ const Projects = () => {
       freelance: false,
     },
     {
-      title: 'Agro AI',
+      title: 'KeyShift',
       description: [
-        'Built an AI-powered web application capable of accurate crop yield prediction and real-time weather data analysis via FastAPI.',
-        'Integrated multilingual support to ensure accessibility and ease of use for diverse rural farming communities.',
-        'Optimized frontend rendering performance and cross-browser compatibility utilizing React and Tailwind CSS.',
+        'Fast, minimal typing test app with real-time WPM and accuracy tracking.',
+        'Visual performance tools to help users analyze typing speed over time.',
+        'Built with Zustand for robust state management and optimized for desktop.',
       ],
-      tech: ['React.js', 'Fast API', 'Auth'],
-      liveDemo: 'https://agrovision-black.vercel.app/',
-      github: 'https://github.com/Sandeep3221/AGRI-CU',
+      tech: ['React.js', 'TypeScript', 'Tailwind CSS', 'Zustand'],
+      liveDemo: 'https://keyshift-snowy.vercel.app/',
+      github: 'https://github.com/Sandeep3221/keyshift',
       gradient: 'from-blue-500 to-cyan-500',
-      img: '/Agri-AI.png',
+      img: '/Keyshift.png',
       freelance: false,
     },
     {
       title: 'LinkedIn Clone',
       description: [
-        'Developed a full-stack social networking platform replicating core professional workflows, including user profiles and post feeds.',
-        'Integrated Socket.io to establish low-latency, real-time instant messaging and dynamic  feed updates.',
-        'Designed secure user authentication and session management pipelines utilizing JWT and HTTP-only cookies.',
+        'Full-stack social platform featuring user profiles and dynamic post feeds.',
+        'Socket.io integration for low-latency, real-time instant messaging.',
+        'Secure authentication pipeline utilizing JWT and HTTP-only cookies.',
       ],
       tech: ['React.js', 'Express.js', 'MongoDB', 'Socket.io'],
       liveDemo: 'https://linked-in-omega-six.vercel.app/login',
@@ -62,17 +62,17 @@ const Projects = () => {
       freelance: false,
     },
     {
-      title: 'Dr. Marketing',
+      title: 'StayFar',
       description: [
-        'Designed and delivered a high-conversion landing page tailored precisely to match the client\'s specific brand identity.',
-        'Developed a responsive, modern frontend architecture emphasizing smooth animations and an intuitive user experience.',
-        'Integrated EmailJS to facilitate seamless lead generation and route direct client communications instantly.',
+        'High-conversion tour and travel agency landing page.',
+        'Smooth glassmorphic UI animations to match the client brand identity.',
+        'Optimized for fast load times and seamless mobile exploration.',
       ],
-      tech: ['React.js', 'Tailwind CSS', 'EmailJs'],
-      liveDemo: 'https://dr-marketing-page.vercel.app/',
-      github: 'https://github.com/Sandeep3221/Dr-MarketingPage',
+      tech: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
+      liveDemo: 'https://stayfar.vercel.app/',
+      github: 'https://github.com/Sandeep3221/stayfar',
       gradient: 'from-teal-400 to-emerald-500',
-      img: '/drmarketing.png',
+      img: '/Stayfar.png',
       freelance: true,
     },
   ]
@@ -111,10 +111,9 @@ const Projects = () => {
                   initial={{ opacity: 0, x: isEven ? -50 : 50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: '-100px' }}
-                  transition={{ duration: 0.8 }}
+                  transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                   className="w-full md:w-1/2 relative group"
                 >
-                  {/* FIX APPLIED HERE: Replaced changing aspect ratios with a consistent 'aspect-video' */}
                   <div className="relative w-full rounded-2xl overflow-hidden border border-gray-800/60 bg-gray-900/50 aspect-video flex items-center justify-center">
                     <img
                       src={project.img}
@@ -136,7 +135,7 @@ const Projects = () => {
                   initial={{ opacity: 0, x: isEven ? 50 : -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: '-100px' }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
+                  transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
                   className="w-full md:w-1/2 flex flex-col justify-center"
                 >
                   <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">

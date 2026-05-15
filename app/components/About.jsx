@@ -28,35 +28,36 @@ const About = () => {
     { label: 'Leadership', value: '2+ Roles', icon: Users },
   ]
 
+  // SENIOR UX FIX: Cut out the fluff. Make these single, punchy, scannable lines.
   const softSkills = [
     {
       title: 'Critical Thinking',
-      desc: 'I break down problems into steps, validate assumptions, and select practical solutions.',
+      desc: 'Breaking down complex problems into actionable, practical solutions.',
       icon: Brain,
     },
     {
       title: 'Decision Making',
-      desc: 'I make data-driven decisions, considering trade-offs and risks, with a focus on action.',
+      desc: 'Making data-driven choices while balancing technical trade-offs.',
       icon: Lightbulb,
     },
     {
-      title: 'Teamwork & Leadership',
-      desc: 'I mentor others, collaborate with design and product teams, and lead through context.',
+      title: 'Team Collaboration',
+      desc: 'Mentoring peers and aligning proactively with cross-functional teams.',
       icon: Users,
     },
     {
       title: 'Security Mindset',
-      desc: 'I apply least privilege principles, manage secrets, validate inputs, and use safe defaults.',
+      desc: 'Implementing safe defaults and validating inputs from day one.',
       icon: ShieldCheck,
     },
     {
       title: 'Ownership',
-      desc: 'I handle end-to-end delivery, including documentation, testing, monitoring, and iterative improvements.',
+      desc: 'Managing the entire lifecycle from architecture to deployment.',
       icon: Target,
     },
     {
       title: 'Communication',
-      desc: 'I provide clear updates, explain concepts simply, and align proactively with teams.',
+      desc: 'Translating technical complexity into simple, understandable terms.',
       icon: MessageSquare,
     },
   ]
@@ -78,7 +79,8 @@ const About = () => {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          // UPGRADED: Premium easing curve for the header
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -96,7 +98,8 @@ const About = () => {
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            // UPGRADED: Premium ease + slight delay
+            transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-8 bg-gray-900/20 p-6 md:p-8 rounded-2xl border border-gray-800/50"
           >
             <h3 className="text-xl font-bold text-white mb-2">Soft Skills & Practices</h3>
@@ -106,7 +109,8 @@ const About = () => {
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.4 + (index * 0.1) }}
+                  // UPGRADED: Cascading buttery ease for each skill
+                  transition={{ duration: 0.8, delay: 0.4 + (index * 0.1), ease: [0.16, 1, 0.3, 1] }}
                   className="space-y-2"
                 >
                   <div className="flex items-center gap-3">
@@ -125,7 +129,8 @@ const About = () => {
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            // UPGRADED: Premium ease + slight delay
+            transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col space-y-6"
           >
             {/* The Intro Card */}
@@ -138,12 +143,13 @@ const About = () => {
                 My Journey
               </h3>
               
+              {/* SENIOR UX FIX: Direct, confident statements. No rambling. */}
               <div className="space-y-4 relative z-10">
                 <p className="text-gray-300 leading-relaxed text-sm md:text-base">
-                  I'm a Full-Stack Developer learning new things in modern web technologies. Currently pursuing my B.Tech in Computer Science at Haldia Institute of Technology, where I maintain an 8.3/10 CGPA.
+                  I'm a Full-Stack Developer passionate about clean code and modern web architecture. I'm currently pursuing my B.Tech in CS at Haldia Institute of Technology (8.3 CGPA).
                 </p>
                 <p className="text-gray-300 leading-relaxed text-sm md:text-base">
-                  My expertise spans crafting intuitive user interfaces with React and Next.js to building robust backend systems with Node.js and Express. Beyond code, I bring strong leadership experience from organizing college tech events and tournaments.
+                  I specialize in building intuitive frontends with React/Next.js and robust backend systems with Node.js. Beyond the screen, I actively lead tech communities and organize college hackathons.
                 </p>
               </div>
             </div>
@@ -155,7 +161,8 @@ const About = () => {
                   key={stat.label}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                  // UPGRADED: Cascading buttery ease for each stat block
+                  transition={{ duration: 0.8, delay: 0.5 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
                   whileHover={{ y: -5 }}
                   className="flex flex-col items-center justify-center p-4 bg-gray-900/40 rounded-xl border border-gray-800/50 hover:border-blue-400/30 hover:bg-gray-800/60 transition-all group"
                 >
@@ -177,7 +184,8 @@ const About = () => {
               key={index}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.8 + (index * 0.1) }}
+              // UPGRADED: Cascading buttery ease for each badge
+              transition={{ duration: 0.8, delay: 0.7 + (index * 0.1), ease: [0.16, 1, 0.3, 1] }}
               className="flex items-center gap-2 px-4 py-2 bg-gray-900/40 border border-gray-800 rounded-full text-xs md:text-sm font-medium text-gray-300 hover:border-blue-400/50 hover:text-white transition-all duration-300"
             >
               <CheckCircle2 size={16} className="text-blue-400 shrink-0" />
