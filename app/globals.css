@@ -91,7 +91,18 @@
   }
 }
 
-/* Custom scrollbar with darker theme */
+html, body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+div[style*="will-change"] {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  transform: translateZ(0);
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -109,16 +120,6 @@
   background: linear-gradient(to bottom, #2563eb, #0891b2);
 }
 
-/* Smooth animations */
-* {
-  transition-property: color, background-color, border-color,
-    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
-    backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-/* Enhanced background animations */
 @keyframes float {
   0%,
   100% {
@@ -147,7 +148,6 @@
   animation: pulse-glow 4s ease-in-out infinite;
 }
 
-/* Gradient text selection */
 ::selection {
   background: rgba(59, 130, 246, 0.3);
   color: white;

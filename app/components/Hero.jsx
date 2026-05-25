@@ -20,17 +20,44 @@ const Hero = () => {
 
   useEffect(() => {
     setIsMounted(true)
-    setParticles(
-      [...Array(30)].map((_, i) => ({
-        id: i,
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        animY: Math.random() * -200,
-        animX: Math.random() * 200 - 100,
-        duration: Math.random() * 15 + 10,
-      }))
-    )
+
+    const generateParticles = () => {
+      setParticles(
+        [...Array(30)].map((_, i) => ({
+          id: i,
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          animY: Math.random() * -200,
+          animX: Math.random() * 200 - 100,
+          duration: Math.random() * 15 + 10,
+        }))
+      )
+    }
+
+    generateParticles()
+    window.addEventListener('resize', generateParticles)
+    return () => window.removeEventListener('resize', generateParticles)
   }, [])
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    }
+  }
 
   return (
     <section
@@ -39,71 +66,37 @@ const Hero = () => {
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
     >
       <motion.div
-        style={{ y, opacity, scale }}
+        style={{ y, opacity, scale, willChange: 'transform, opacity' }}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
         className="text-center z-10 px-4 max-w-5xl mx-auto flex flex-col items-center"
       >
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          variants={itemVariants}
           className="mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-900/50 border border-gray-800 backdrop-blur-sm"
         >
           <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
           <span className="text-sm font-medium text-gray-300">Available for new opportunities</span>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0.01, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="mb-8"
-        >
+        <motion.div variants={itemVariants} className="mb-8">
           <h1 className="text-5xl md:text-7xl font-bold mb-4">
             <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
               Sandeep Adhikari
             </span>
           </h1>
-          <motion.p
-            initial={{ opacity: 0.01, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl text-gray-300"
-          >
+          <p className="text-xl md:text-2xl text-gray-300">
             Full-Stack Developer & Problem Solver
-          </motion.p>
+          </p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0.01, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex justify-center space-x-6 mb-12"
-        >
+        <motion.div variants={itemVariants} className="flex justify-center space-x-6 mb-12">
           {[
-            {
-              icon: Github,
-              href: 'https://github.com/Sandeep3221',
-              label: 'GitHub',
-              newTab: true,
-            },
-            {
-              icon: Linkedin,
-              href: 'https://www.linkedin.com/in/sandeep-adhikari-76b778311',
-              label: 'LinkedIn',
-              newTab: true,
-            },
-            {
-              icon: Mail,
-              href: 'mailto:kashyapadhikari09@gmail.com',
-              label: 'Email',
-              newTab: false,
-            },
-            {
-              icon: Download,
-              href: '/resume.pdf',
-              label: 'Resume',
-              download: true,
-            },
+            { icon: Github, href: 'https://github.com/Sandeep3221', label: 'GitHub', newTab: true },
+            { icon: Linkedin, href: 'https://www.linkedin.com/in/sandeep-adhikari-76b778311', label: 'LinkedIn', newTab: true },
+            { icon: Mail, href: 'mailto:kashyapadhikari09@gmail.com', label: 'Email', newTab: false },
+            { icon: Download, href: '/resume.pdf', label: 'Resume', download: true },
           ].map((social) => (
             <motion.a
               key={social.label}
@@ -114,20 +107,12 @@ const Hero = () => {
               whileTap={{ scale: 0.9 }}
               className="p-3 bg-gray-900/50 backdrop-blur-sm rounded-full border border-gray-700/50 hover:border-blue-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-400/20"
             >
-              <social.icon
-                size={24}
-                className="text-gray-300 hover:text-blue-400 transition-colors"
-              />
+              <social.icon size={24} className="text-gray-300 hover:text-blue-400 transition-colors" />
             </motion.a>
           ))}
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0.01, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
-        >
+        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
           <motion.a
             href="#projects"
             whileHover={{ scale: 1.05 }}
@@ -146,12 +131,7 @@ const Hero = () => {
           </motion.a>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="flex flex-wrap items-center justify-center gap-x-2 gap-y-3 text-sm text-gray-500 font-medium"
-        >
+        <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center gap-x-2 gap-y-3 text-sm text-gray-500 font-medium">
           <span>Student developer based in</span>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-900/50 border border-gray-800 backdrop-blur-sm text-gray-300">
             <MapPin size={14} className="text-teal-400" />
@@ -163,14 +143,19 @@ const Hero = () => {
 
       <motion.div
         animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+        transition={{ duration: 2, repeat: Infinity }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
         <ChevronDown size={32} className="text-gray-400" />
       </motion.div>
 
       {isMounted && (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
+          className="absolute inset-0 overflow-hidden pointer-events-none z-0"
+        >
           {particles.map((p) => (
             <motion.div
               key={p.id}
@@ -183,31 +168,25 @@ const Hero = () => {
               }}
               transition={{
                 duration: p.duration,
-                repeat: Number.POSITIVE_INFINITY,
+                repeat: Infinity,
                 repeatType: 'reverse',
               }}
             />
           ))}
-        </div>
+        </motion.div>
       )}
 
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{
-            duration: 50,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: 'linear',
-          }}
+          transition={{ duration: 50, repeat: Infinity, ease: 'linear' }}
+          style={{ willChange: 'transform' }}
           className="absolute top-1/4 left-1/4 w-64 h-64 border border-blue-400/10 rounded-full"
         />
         <motion.div
           animate={{ rotate: -360 }}
-          transition={{
-            duration: 40,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: 'linear',
-          }}
+          transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+          style={{ willChange: 'transform' }}
           className="absolute bottom-1/4 right-1/4 w-48 h-48 border border-cyan-400/10 rounded-full"
         />
       </div>

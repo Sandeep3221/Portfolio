@@ -1,13 +1,9 @@
 'use client'
 
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { motion } from "framer-motion"
 import { Terminal, Layout, Server, Wrench } from "lucide-react"
 
 const Skills = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-
   const skillCategories = [
     {
       title: "Languages & Core",
@@ -67,16 +63,50 @@ const Skills = () => {
     },
   ]
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1
+      }
+    }
+  }
+
+  const categoryVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.16, 1, 0.3, 1],
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  }
+
+  const pillVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
+    }
+  }
+
   return (
-    <section id="skills" ref={ref} className="py-20 px-4 relative overflow-hidden bg-black">
-      {/* Background gradient overlay */}
+    <section id="skills" className="py-20 px-4 relative overflow-hidden bg-black">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/5 to-transparent" />
 
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -88,18 +118,20 @@ const Skills = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto rounded-full" />
         </motion.div>
 
-        {/* 2 columns on tablet, 4 on desktop */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skillCategories.map((category, categoryIndex) => (
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
+          {skillCategories.map((category) => (
             <motion.div
               key={category.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: categoryIndex * 0.15 }}
+              variants={categoryVariants}
               whileHover={{ y: -5 }}
               className={`${category.bgColor} backdrop-blur-md p-6 sm:p-8 rounded-2xl border ${category.borderColor} ${category.hoverBorder} transition-all duration-300 group hover:shadow-xl ${category.glow}`}
             >
-              {/* Card Header with Icon */}
               <div className="flex items-center gap-3 mb-6">
                 <div className={`p-2.5 rounded-lg ${category.pillBg} ${category.pillBorder} border`}>
                   <category.icon size={20} className={category.iconColor} />
@@ -109,18 +141,13 @@ const Skills = () => {
                 </h3>
               </div>
 
-              {/* Pill-style Skills List */}
               <div className="flex flex-wrap gap-2.5">
-                {category.skills.map((skill, skillIndex) => (
+                {category.skills.map((skill) => (
                   <motion.div
                     key={skill}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ duration: 0.4, delay: categoryIndex * 0.15 + skillIndex * 0.1 }}
+                    variants={pillVariants}
                     whileHover={{ scale: 1.05 }}
-                    className={`px-3.5 py-1.5 rounded-full text-sm font-medium border backdrop-blur-sm cursor-default transition-colors
-                      ${category.pillBg} ${category.pillBorder} ${category.pillText}
-                      hover:bg-opacity-20 hover:text-white`}
+                    className={`px-3.5 py-1.5 rounded-full text-sm font-medium border backdrop-blur-sm cursor-default transition-colors ${category.pillBg} ${category.pillBorder} ${category.pillText} hover:bg-opacity-20 hover:text-white`}
                   >
                     {skill}
                   </motion.div>
@@ -128,19 +155,20 @@ const Skills = () => {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
-      {/* Floating background elements for visual consistency */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           animate={{ x: [0, 80, 0], y: [0, -40, 0], rotate: [0, 180, 360] }}
-          transition={{ duration: 25, repeat: Number.POSITIVE_INFINITY, ease: 'linear' }}
+          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+          style={{ willChange: 'transform' }}
           className="absolute top-1/3 left-10 w-2 h-2 bg-blue-400/20 rounded-full blur-[1px]"
         />
         <motion.div
           animate={{ x: [0, -60, 0], y: [0, 50, 0], rotate: [0, -180, -360] }}
-          transition={{ duration: 30, repeat: Number.POSITIVE_INFINITY, ease: 'linear' }}
+          transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+          style={{ willChange: 'transform' }}
           className="absolute bottom-1/3 right-10 w-1.5 h-1.5 bg-cyan-400/20 rounded-full blur-[1px]"
         />
       </div>

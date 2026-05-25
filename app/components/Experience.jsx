@@ -1,13 +1,9 @@
 'use client'
 
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { motion } from 'framer-motion'
 import { Calendar, MapPin, Briefcase } from 'lucide-react'
 
 const Experience = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
   const experiences = [
     {
       title: 'Freelance Web Developer',
@@ -50,13 +46,49 @@ const Experience = () => {
     },
   ]
 
+  const headerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    }
+  }
+
+  const cardVariants = {
+    hidden: (index) => ({ 
+      opacity: 0, 
+      x: index % 2 === 0 ? -40 : 40 
+    }),
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { 
+        duration: 0.9, 
+        ease: [0.16, 1, 0.3, 1],
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  }
+
+  const bulletVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+    }
+  }
+
   return (
-    <section id="experience" ref={ref} className="py-20 px-4 relative">
+    <section id="experience" className="py-20 px-4 relative">
       <div className="max-w-4xl mx-auto relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          variants={headerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -69,20 +101,19 @@ const Experience = () => {
         </motion.div>
 
         <div className="relative">
-          {/* Timeline line - adjusted positioning for perfect centering with the dots */}
           <div className="absolute left-[31px] top-4 bottom-0 w-0.5 bg-gradient-to-b from-blue-400/50 via-purple-400/50 to-cyan-400/50 hidden md:block" />
 
           <div className="space-y-12">
             {experiences.map((exp, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                // UPGRADED: Added the buttery cubic-bezier ease here for the main cards
-                transition={{ duration: 0.9, delay: index * 0.2, ease: [0.16, 1, 0.3, 1] }}
+                custom={index}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
                 className="relative"
               >
-                {/* Timeline dot - precisely aligned over the vertical line */}
                 <div
                   className={`absolute left-[24px] top-6 w-4 h-4 bg-gradient-to-r ${exp.color} rounded-full hidden md:block shadow-[0_0_15px_rgba(0,0,0,0.5)] ring-4 ring-black z-10`}
                 />
@@ -105,7 +136,6 @@ const Experience = () => {
                       </div>
                     </div>
                     
-                    {/* Date Badge */}
                     <div className="flex items-center space-x-2 text-gray-300 bg-gray-800/50 px-4 py-2 rounded-full border border-gray-700/50 w-fit shrink-0">
                       <Calendar size={14} className="text-blue-400" />
                       <span className="text-sm font-medium whitespace-nowrap">{exp.period}</span>
@@ -116,14 +146,7 @@ const Experience = () => {
                     {exp.description.map((item, itemIndex) => (
                       <motion.li
                         key={itemIndex}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : {}}
-                        // UPGRADED: Added the buttery ease to the individual bullet points too
-                        transition={{
-                          duration: 0.8,
-                          delay: index * 0.2 + itemIndex * 0.1,
-                          ease: [0.16, 1, 0.3, 1]
-                        }}
+                        variants={bulletVariants}
                         className="flex items-start space-x-3 text-gray-300"
                       >
                         <div

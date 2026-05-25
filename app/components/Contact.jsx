@@ -1,17 +1,14 @@
 'use client'
 
-import { motion, useInView } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useRef, useState } from 'react'
 import emailjs from '@emailjs/browser'
 import { Mail, Phone, MapPin, Send, Loader2, CheckCircle2, XCircle } from 'lucide-react'
 
 const Contact = () => {
-  const ref = useRef(null)
   const formRef = useRef(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
-
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   const sendEmail = (e) => {
     e.preventDefault()
@@ -66,19 +63,54 @@ const Contact = () => {
     },
   ]
 
+  const headerVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    }
+  }
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2
+      }
+    }
+  }
+
+  const cardVariants = {
+    hidden: { opacity: 0, x: -30 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    }
+  }
+
+  const formVariants = {
+    hidden: { opacity: 0, x: 40 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }
+    }
+  }
+
   return (
-    <section
-      id="contact"
-      ref={ref}
-      className="relative py-16 sm:py-20 px-4 overflow-hidden"
-    >
+    <section id="contact" className="relative py-16 sm:py-20 px-4 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-t from-black via-gray-950/50 to-transparent" />
 
       <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          variants={headerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
           className="text-center mb-14"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
@@ -98,25 +130,22 @@ const Contact = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
             className="space-y-6"
           >
-            {contactInfo.map((info, index) => (
+            {contactInfo.map((info) => (
               <motion.a
                 key={info.label}
+                variants={cardVariants}
                 href={info.href}
                 {...(info.newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                 whileHover={{ scale: 1.02 }}
                 className="flex items-start gap-4 p-4 sm:p-5 bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800/50 hover:border-gray-700/50 hover:bg-gray-800/50 transition-all duration-300 group"
               >
-                <div
-                  className={`shrink-0 p-3 bg-gradient-to-r ${info.gradient} rounded-lg group-hover:scale-105 transition-transform duration-300`}
-                >
+                <div className={`shrink-0 p-3 bg-gradient-to-r ${info.gradient} rounded-lg group-hover:scale-105 transition-transform duration-300`}>
                   <info.icon size={20} className="text-white" />
                 </div>
 
@@ -131,16 +160,13 @@ const Contact = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            variants={formVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
             className="bg-gray-900/50 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-gray-800/50"
           >
-            <form
-              ref={formRef}
-              onSubmit={sendEmail}
-              className="space-y-5"
-            >
+            <form ref={formRef} onSubmit={sendEmail} className="space-y-5">
               <div>
                 <input
                   type="text"
