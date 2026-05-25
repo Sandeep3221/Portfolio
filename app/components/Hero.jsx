@@ -63,7 +63,7 @@ const Hero = () => {
     <section
       id="home"
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       <motion.div
         style={{ y, opacity, scale, willChange: 'transform, opacity' }}

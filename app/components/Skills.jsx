@@ -98,7 +98,7 @@ const Skills = () => {
   }
 
   return (
-    <section id="skills" className="py-20 px-4 relative overflow-hidden bg-black">
+    <section id="skills" className="py-20 px-4 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/5 to-transparent" />
 
       <div className="max-w-6xl mx-auto relative z-10">
