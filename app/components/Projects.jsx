@@ -8,15 +8,43 @@ const Projects = () => {
     {
       title: 'Kalimpong Homestays',
       description: [
-        'Full-stack reservation platform with dynamic routing and secure authentication.',
-        'Custom MongoDB search and filtering logic to handle complex availability queries.',
-        'Mobile-first, highly responsive frontend built for speed and ease of use.',
+        'Full-stack reservation platform with secure authentication and dynamic routing.',
+        'Integrated Razorpay payment gateway for seamless online bookings and payments.',
+        'Custom MongoDB search and filtering system for real-time room availability.',
       ],
-      tech: ['React.js', 'Tailwind CSS', 'Node.js', 'Express.js', 'MongoDB', 'Auth'],
+      tech: [
+        'React.js',
+        'Tailwind CSS',
+        'Node.js',
+        'Express.js',
+        'MongoDB',
+        'Razorpay',
+      ],
       liveDemo: 'https://homestay-reservation.vercel.app/',
       github: 'https://github.com/Sandeep3221/Homestay_Reservation',
       gradient: 'from-amber-400 to-orange-500',
-      img: '/Homestay.png',
+      img: '/KalimpongHome.png',
+      freelance: false,
+    },
+    {
+      title: 'P2P File Transfer',
+      description: [
+        'Browser-to-browser file sharing powered by WebRTC with no file uploads.',
+        'End-to-end encrypted transfer using SHA-256 verification for secure sharing.',
+        'Real-time connection setup with WebSockets for fast and seamless transfers.',
+      ],
+      tech: [
+        'React.js',
+        'WebRTC',
+        'WebSocket',
+        'Node.js',
+        'Express.js',
+        'SHA-256',
+      ],
+      liveDemo: 'https://p2-p-file-transfer-sigma.vercel.app/',
+      github: 'https://github.com/Sandeep3221',
+      gradient: 'from-emerald-400 to-cyan-500',
+      img: '/FileTransfer.png',
       freelance: false,
     },
     {
@@ -122,6 +150,7 @@ const Projects = () => {
               Projects
             </span>
           </h2>
+
           <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto rounded-full" />
         </motion.div>
 
@@ -136,7 +165,9 @@ const Projects = () => {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 custom={isEven}
-                className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 md:gap-16 items-center`}
+                className={`flex flex-col ${
+                  isEven ? 'md:flex-row' : 'md:flex-row-reverse'
+                } gap-8 md:gap-16 items-center`}
               >
                 <motion.div
                   variants={imageVariants}
@@ -149,8 +180,9 @@ const Projects = () => {
                       alt={project.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
                     />
+
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60" />
-                    
+
                     {project.freelance && (
                       <span className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 bg-black/80 backdrop-blur-md text-yellow-400 text-xs font-bold rounded-full border border-yellow-400/30">
                         <Briefcase size={12} />
@@ -182,10 +214,14 @@ const Projects = () => {
 
                   <ul className="space-y-3 mb-8">
                     {project.description.map((item, itemIndex) => (
-                      <li key={itemIndex} className="flex items-start space-x-3 text-gray-400">
+                      <li
+                        key={itemIndex}
+                        className="flex items-start space-x-3 text-gray-400"
+                      >
                         <div
                           className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${project.gradient} mt-2.5 flex-shrink-0 opacity-80`}
                         />
+
                         <span className="text-base leading-relaxed group-hover:text-gray-300 transition-colors">
                           {item}
                         </span>
@@ -201,12 +237,20 @@ const Projects = () => {
                         rel="noopener noreferrer"
                         className={`flex-1 sm:flex-none flex justify-center items-center space-x-1.5 sm:space-x-2 px-2 sm:px-6 py-3 bg-gradient-to-r ${project.gradient} rounded-xl text-white font-semibold text-sm sm:text-base hover:scale-105 hover:shadow-lg transition-all duration-300 whitespace-nowrap`}
                       >
-                        <ExternalLink size={18} className="w-4 h-4 sm:w-5 sm:h-5" />
+                        <ExternalLink
+                          size={18}
+                          className="w-4 h-4 sm:w-5 sm:h-5"
+                        />
                         <span>Live Demo</span>
                       </a>
                     ) : (
-                      <span className={`flex-1 sm:flex-none flex justify-center items-center space-x-1.5 sm:space-x-2 px-2 sm:px-6 py-3 bg-gradient-to-r ${project.gradient} rounded-xl text-white font-semibold text-sm sm:text-base opacity-50 cursor-not-allowed whitespace-nowrap`}>
-                        <ExternalLink size={18} className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <span
+                        className={`flex-1 sm:flex-none flex justify-center items-center space-x-1.5 sm:space-x-2 px-2 sm:px-6 py-3 bg-gradient-to-r ${project.gradient} rounded-xl text-white font-semibold text-sm sm:text-base opacity-50 cursor-not-allowed whitespace-nowrap`}
+                      >
+                        <ExternalLink
+                          size={18}
+                          className="w-4 h-4 sm:w-5 sm:h-5"
+                        />
                         <span>Live Demo</span>
                       </span>
                     )}

@@ -1,13 +1,11 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useMemo } from 'react'
 import { ChevronDown, Download, Github, Linkedin, Mail, MapPin } from 'lucide-react'
 
 const Hero = () => {
   const ref = useRef(null)
-  const [particles, setParticles] = useState([])
-  const [isMounted, setIsMounted] = useState(false)
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -18,26 +16,18 @@ const Hero = () => {
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0], { clamp: true })
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8], { clamp: true })
 
-  useEffect(() => {
-    setIsMounted(true)
-
-    const generateParticles = () => {
-      setParticles(
-        [...Array(30)].map((_, i) => ({
-          id: i,
-          x: Math.random() * window.innerWidth,
-          y: Math.random() * window.innerHeight,
-          animY: Math.random() * -200,
-          animX: Math.random() * 200 - 100,
-          duration: Math.random() * 15 + 10,
-        }))
-      )
-    }
-
-    generateParticles()
-    window.addEventListener('resize', generateParticles)
-    return () => window.removeEventListener('resize', generateParticles)
-  }, [])
+  // Pre-generate particle positions at module level (no useState, no useEffect, no re-renders)
+  const particles = useMemo(() => 
+    [...Array(15)].map((_, i) => ({
+      id: i,
+      left: `${(i * 7.3 + 13) % 100}%`,
+      top: `${(i * 11.7 + 7) % 100}%`,
+      duration: `${10 + (i % 5) * 3}s`,
+      delay: `${(i % 4) * -2.5}s`,
+      moveX: `${((i % 3) - 1) * 80}px`,
+      moveY: `${-80 - (i % 4) * 40}px`,
+    })),
+  [])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -66,7 +56,7 @@ const Hero = () => {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       <motion.div
-        style={{ y, opacity, scale, willChange: 'transform, opacity' }}
+        style={{ y, opacity, scale }}
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -149,45 +139,31 @@ const Hero = () => {
         <ChevronDown size={32} className="text-gray-400" />
       </motion.div>
 
-      {isMounted && (
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.5 }}
-          className="absolute inset-0 overflow-hidden pointer-events-none z-0"
-        >
-          {particles.map((p) => (
-            <motion.div
-              key={p.id}
-              className="absolute w-1 h-1 bg-blue-400/20 rounded-full"
-              initial={{ x: p.x, y: p.y }}
-              animate={{
-                y: [null, p.animY, null],
-                x: [null, p.animX, null],
-                opacity: [0.2, 0.8, 0.2],
-              }}
-              transition={{
-                duration: p.duration,
-                repeat: Infinity,
-                repeatType: 'reverse',
-              }}
-            />
-          ))}
-        </motion.div>
-      )}
-
+      {/* CSS-animated particles — runs entirely on compositor thread */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 50, repeat: Infinity, ease: 'linear' }}
-          style={{ willChange: 'transform' }}
-          className="absolute top-1/4 left-1/4 w-64 h-64 border border-blue-400/10 rounded-full"
+        {particles.map((p) => (
+          <div
+            key={p.id}
+            className="absolute w-1 h-1 bg-blue-400/20 rounded-full animate-particle"
+            style={{
+              left: p.left,
+              top: p.top,
+              '--particle-x': p.moveX,
+              '--particle-y': p.moveY,
+              animationDuration: p.duration,
+              animationDelay: p.delay,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* CSS-animated rotating circles — no Framer Motion overhead */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div
+          className="absolute top-1/4 left-1/4 w-64 h-64 border border-blue-400/10 rounded-full animate-spin-slow"
         />
-        <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-          style={{ willChange: 'transform' }}
-          className="absolute bottom-1/4 right-1/4 w-48 h-48 border border-cyan-400/10 rounded-full"
+        <div
+          className="absolute bottom-1/4 right-1/4 w-48 h-48 border border-cyan-400/10 rounded-full animate-spin-reverse"
         />
       </div>
     </section>

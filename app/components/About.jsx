@@ -188,17 +188,11 @@ const About = () => {
       </div>
 
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          animate={{ x: [0, 100, 0], y: [0, -50, 0], rotate: [0, 180, 360] }}
-          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          style={{ willChange: "transform" }}
-          className="absolute top-1/4 left-10 w-2 h-2 bg-blue-400/20 rounded-full"
+        <div
+          className="absolute top-1/4 left-10 w-2 h-2 bg-blue-400/20 rounded-full animate-float-slow"
         />
-        <motion.div
-          animate={{ x: [0, -80, 0], y: [0, 60, 0], rotate: [0, -180, -360] }}
-          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-          style={{ willChange: "transform" }}
-          className="absolute bottom-1/4 right-10 w-1 h-1 bg-cyan-400/20 rounded-full"
+        <div
+          className="absolute bottom-1/4 right-10 w-1 h-1 bg-cyan-400/20 rounded-full animate-float-reverse"
         />
       </div>
     </section>

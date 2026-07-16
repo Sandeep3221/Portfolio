@@ -2,9 +2,10 @@
 
 import { motion } from "framer-motion"
 import { Terminal, Layout, Server, Wrench } from "lucide-react"
+import { useMemo } from "react"
 
 const Skills = () => {
-  const skillCategories = [
+  const skillCategories = useMemo(() => [
     {
       title: "Languages & Core",
       icon: Terminal,
@@ -61,7 +62,7 @@ const Skills = () => {
       pillBorder: "border-slate-500/20",
       pillText: "text-slate-300",
     },
-  ]
+  ], [])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -82,18 +83,7 @@ const Skills = () => {
       transition: {
         duration: 0.6,
         ease: [0.16, 1, 0.3, 1],
-        staggerChildren: 0.1,
-        delayChildren: 0.2
       }
-    }
-  }
-
-  const pillVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
     }
   }
 
@@ -129,8 +119,7 @@ const Skills = () => {
             <motion.div
               key={category.title}
               variants={categoryVariants}
-              whileHover={{ y: -5 }}
-              className={`${category.bgColor} backdrop-blur-md p-6 sm:p-8 rounded-2xl border ${category.borderColor} ${category.hoverBorder} transition-all duration-300 group hover:shadow-xl ${category.glow}`}
+              className={`${category.bgColor} backdrop-blur-md p-6 sm:p-8 rounded-2xl border ${category.borderColor} ${category.hoverBorder} transition-all duration-300 group hover:shadow-xl ${category.glow} hover:-translate-y-1`}
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className={`p-2.5 rounded-lg ${category.pillBg} ${category.pillBorder} border`}>
@@ -143,14 +132,12 @@ const Skills = () => {
 
               <div className="flex flex-wrap gap-2.5">
                 {category.skills.map((skill) => (
-                  <motion.div
+                  <div
                     key={skill}
-                    variants={pillVariants}
-                    whileHover={{ scale: 1.05 }}
-                    className={`px-3.5 py-1.5 rounded-full text-sm font-medium border backdrop-blur-sm cursor-default transition-colors ${category.pillBg} ${category.pillBorder} ${category.pillText} hover:bg-opacity-20 hover:text-white`}
+                    className={`skill-pill px-3.5 py-1.5 rounded-full text-sm font-medium border backdrop-blur-sm cursor-default ${category.pillBg} ${category.pillBorder} ${category.pillText}`}
                   >
                     {skill}
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </motion.div>
@@ -158,18 +145,13 @@ const Skills = () => {
         </motion.div>
       </div>
 
+      {/* CSS-animated floating dots instead of Framer Motion */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          animate={{ x: [0, 80, 0], y: [0, -40, 0], rotate: [0, 180, 360] }}
-          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-          style={{ willChange: 'transform' }}
-          className="absolute top-1/3 left-10 w-2 h-2 bg-blue-400/20 rounded-full blur-[1px]"
+        <div
+          className="absolute top-1/3 left-10 w-2 h-2 bg-blue-400/20 rounded-full blur-[1px] animate-float-slow"
         />
-        <motion.div
-          animate={{ x: [0, -60, 0], y: [0, 50, 0], rotate: [0, -180, -360] }}
-          transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-          style={{ willChange: 'transform' }}
-          className="absolute bottom-1/3 right-10 w-1.5 h-1.5 bg-cyan-400/20 rounded-full blur-[1px]"
+        <div
+          className="absolute bottom-1/3 right-10 w-1.5 h-1.5 bg-cyan-400/20 rounded-full blur-[1px] animate-float-reverse"
         />
       </div>
     </section>

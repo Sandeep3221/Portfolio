@@ -96,13 +96,6 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-div[style*="will-change"] {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  perspective: 1000px;
-  transform: translateZ(0);
-}
-
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -120,6 +113,100 @@ div[style*="will-change"] {
   background: linear-gradient(to bottom, #2563eb, #0891b2);
 }
 
+/* ========================================
+   CSS Animations — all run on compositor thread
+   ======================================== */
+
+/* Hero particles — uses CSS custom properties for per-element variety */
+@keyframes particle-drift {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translate(var(--particle-x, 50px), var(--particle-y, -80px));
+    opacity: 0.6;
+  }
+}
+
+.animate-particle {
+  animation: particle-drift var(--particle-duration, 12s) ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Slow spin for hero decorative circles */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 50s linear infinite;
+  will-change: transform;
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 40s linear infinite;
+  will-change: transform;
+}
+
+/* Ultra-slow spin for page background conic gradient */
+.animate-spin-ultra-slow {
+  animation: spin-slow 60s linear infinite;
+  will-change: transform;
+}
+
+/* Floating dots for About and Skills sections */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(60px, -30px) rotate(120deg);
+  }
+  66% {
+    transform: translate(30px, -50px) rotate(240deg);
+  }
+}
+
+@keyframes float-reverse {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(-50px, 30px) rotate(-120deg);
+  }
+  66% {
+    transform: translate(-25px, 50px) rotate(-240deg);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 20s linear infinite;
+  will-change: transform;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 25s linear infinite;
+  will-change: transform;
+}
+
+/* Skill pill hover — pure CSS, no JS overhead */
+.skill-pill {
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.skill-pill:hover {
+  transform: scale(1.05);
+  color: #ffffff;
+}
+
+/* Generic float animation kept for backward compat */
 @keyframes float {
   0%,
   100% {
