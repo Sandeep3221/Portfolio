@@ -252,16 +252,6 @@ const Contact = () => {
             </form>
           </motion.div>
         </div>
-
-        {/* Footer */}
-        <motion.footer
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-20 pt-8 border-t border-gray-800/50 text-center"
-        >
-        </motion.footer>
       </div>
     </section>
   )
