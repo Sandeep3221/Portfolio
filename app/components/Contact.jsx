@@ -5,6 +5,71 @@ import { useRef, useState } from 'react'
 import emailjs from '@emailjs/browser'
 import { Mail, Phone, MapPin, Send, Loader2, CheckCircle2, XCircle } from 'lucide-react'
 
+// Static data at module level
+const contactInfo = [
+  {
+    icon: Mail,
+    label: 'Email',
+    value: 'kashyapadhikari09@gmail.com',
+    href: 'mailto:kashyapadhikari09@gmail.com',
+    gradient: 'from-blue-500 to-blue-600',
+  },
+  {
+    icon: Phone,
+    label: 'Phone',
+    value: '(+91) 7866942314',
+    href: 'tel:+917866942314',
+    gradient: 'from-cyan-500 to-cyan-600',
+  },
+  {
+    icon: MapPin,
+    label: 'Location',
+    value: 'Kalimpong, West Bengal',
+    href: 'https://www.google.com/maps/place/Kalimpong,+West+Bengal',
+    newTab: true,
+    gradient: 'from-teal-500 to-teal-600',
+  },
+]
+
+// Static animation variants at module level
+const headerVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  },
+}
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    },
+  },
+}
+
+const cardVariants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  },
+}
+
+const formVariants = {
+  hidden: { opacity: 0, x: 40 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] },
+  },
+}
+
 const Contact = () => {
   const formRef = useRef(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -36,69 +101,6 @@ const Contact = () => {
           setTimeout(() => setSubmitStatus(null), 5000)
         }
       )
-  }
-
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: 'Email',
-      value: 'kashyapadhikari09@gmail.com',
-      href: 'mailto:kashyapadhikari09@gmail.com',
-      gradient: 'from-blue-500 to-blue-600',
-    },
-    {
-      icon: Phone,
-      label: 'Phone',
-      value: '(+91) 7866942314',
-      href: 'tel:+917866942314',
-      gradient: 'from-cyan-500 to-cyan-600',
-    },
-    {
-      icon: MapPin,
-      label: 'Location',
-      value: 'Kalimpong, West Bengal',
-      href: 'https://www.google.com/maps/place/Kalimpong,+West+Bengal',
-      newTab: true,
-      gradient: 'from-teal-500 to-teal-600',
-    },
-  ]
-
-  const headerVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
-    }
-  }
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2
-      }
-    }
-  }
-
-  const cardVariants = {
-    hidden: { opacity: 0, x: -30 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
-    }
-  }
-
-  const formVariants = {
-    hidden: { opacity: 0, x: 40 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }
-    }
   }
 
   return (
@@ -166,6 +168,7 @@ const Contact = () => {
             viewport={{ once: true, amount: 0.2 }}
             className="bg-gray-900/50 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-gray-800/50"
           >
+            <h3 className="text-lg font-semibold text-white mb-5">Send me a message</h3>
             <form ref={formRef} onSubmit={sendEmail} className="space-y-5">
               <div>
                 <input
@@ -173,6 +176,8 @@ const Contact = () => {
                   name="from_name"
                   required
                   placeholder="Your Name"
+                  autoComplete="name"
+                  aria-label="Your name"
                   disabled={isSubmitting}
                   className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700/50 rounded-lg text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300 disabled:opacity-50"
                 />
@@ -184,6 +189,8 @@ const Contact = () => {
                   name="from_email"
                   required
                   placeholder="your.email@example.com"
+                  autoComplete="email"
+                  aria-label="Your email address"
                   disabled={isSubmitting}
                   className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700/50 rounded-lg text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300 disabled:opacity-50"
                 />
@@ -195,6 +202,7 @@ const Contact = () => {
                   required
                   rows={5}
                   placeholder="Tell me about your project or just say hello!"
+                  aria-label="Your message"
                   disabled={isSubmitting}
                   className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700/50 rounded-lg text-white placeholder-gray-400 resize-none outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300 disabled:opacity-50"
                 />
@@ -244,6 +252,19 @@ const Contact = () => {
             </form>
           </motion.div>
         </div>
+
+        {/* Footer */}
+        <motion.footer
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mt-20 pt-8 border-t border-gray-800/50 text-center"
+        >
+          <p className="text-gray-500 text-sm">
+            © {new Date().getFullYear()} Sandeep Adhikari. Built with Next.js & Framer Motion.
+          </p>
+        </motion.footer>
       </div>
     </section>
   )

@@ -1,6 +1,5 @@
 'use client'
 
-import { useRef } from 'react'
 import Hero from './components/Hero'
 import About from './components/About'
 import Skills from './components/Skills'
@@ -9,17 +8,10 @@ import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Navigation from './components/Navigation'
 
-// home
 export default function Home() {
-  const containerRef = useRef(null)
-
-  // home
   return (
-    <div
-      ref={containerRef}
-      className="relative min-h-screen bg-black text-white overflow-x-hidden"
-    >
-      {/* Static background layers — no JS-driven scroll animation, pure CSS */}
+    <div className="relative min-h-screen bg-black text-white overflow-x-hidden">
+      {/* Static background layers — pure CSS, no JS overhead */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-black to-gray-900" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-blue-900/10 via-transparent to-transparent" />
