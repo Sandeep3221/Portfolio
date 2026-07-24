@@ -261,9 +261,6 @@ const Contact = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="mt-20 pt-8 border-t border-gray-800/50 text-center"
         >
-          <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} Sandeep Adhikari. Built with Next.js & Framer Motion.
-          </p>
         </motion.footer>
       </div>
     </section>
